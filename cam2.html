@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.2.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
+<meta content=
+"initial-scale=1.0, maximum-scale=9.0, width=device-width" name=
+"viewport">
+<title>Webcam Check | Webcam Test</title>
+<meta name="description" content=
+"Check webcam online to see if is working properly">
+<link href="https://static.webcamtests.com/theme/img/favicon.ico"
+rel="icon" type="image/x-icon">
+<link href="cam_files/main.css" rel="stylesheet">
+
+<link rel="preload" href="cam_files/main_004.js" as="script">
+<link rel="preload" href="cam_files/main_002.js" as="script">
+<link rel="preload" href="cam_files/main_002.css" as="style">
+
+
+</head>
+<body>
+  <section>
+    <div data-include-widget="name=webcam_checker">
+      <div class="box box-middle">
+	<div>
+	  <h1>Webcam Check</h1>
+	  <ul id="webcam-notices">
+	    <li class="notice-loading loading_detectingDevices" style=
+		"display: none;">Detecting your media devices. Please wait...</li>
+	    <li class="notice-loading loading_waitingPermission" style=
+		"display: none;">Waiting for your permission...</li>
+	    <li class="notice-loading loading_startingWebcamera" style=
+		"display: none;">Starting your webcam. Please wait...</li>
+	    <li class="notice-loading loading_detectingMaxres" style=
+		"display: none;">Detecting the maximum supported resolution. Please
+	      wait...</li>
+	    <li class="notice-info info_readMore" style="display: none;">For
+	      more information visit the following pages:</li>
+	    <li class="notice-info info_switchCamera" style="display: none;">
+	      Changing the camera will reset the current process. Do you want to
+	      continue?</li>
+	    <li class="notice-fail fail_unexpectedError" style=
+		"display: none;">An unexpected error occurred. Reload the page and
+	      try again.</li>
+	    <li class="notice-fail fail_noWebcamNoDevices" style=
+		"display: none;">Could not find any media devices. It is very
+	      likely that your browser does not allow access to these devices.
+	      Try to reload this page or open it using another browser. Just
+	      remember that to start your webcam you need to allow our website to
+	      use it.</li>
+	    <li class="notice-fail fail_noWebcamSomeDevices" style=
+		"display: list-item;">Could not find a web camera, however there
+	      are other media devices (like speakers or microphones). Most
+	      likely, this means that your webcam is not working properly or your
+	      browser cannot access it.<br>
+	      <button>Click here to try forcibly start the camera</button></li>
+	    <li class="notice-fail fail_browserNotSupported" style=
+		"display: none;">Your browser does not support features for
+	      accessing media devices. Please upgrade your browser or install
+	      another one.</li>
+	    <li class="notice-fail fail_promiseNotAllowed" style=
+		"display: none;">You did not allow the browser to use the web
+	      camera. Reload the page and try again.</li>
+	    <li class="notice-fail fail_promiseNotReadable" style=
+		"display: none;">Apparently, your webcam is being used or blocked
+	      by another application. To start your webcam, you must temporarily
+	      close that application.</li>
+	    <li class="notice-fail fail_devidUnavailable" style=
+		"display: none;">It looks like your browser is blocking access to
+	      webcam identifiers. Because of this, it’s impossible to detect and
+	      manage all available webcams.</li>
+	    <li class="notice-fail fail_permissionTimeout" style=
+		"display: none;">Waiting time for your permission has expired.
+	      Reload the page and try again.</li>
+	    <li class="notice-fail fail_cannotStreamVideo" style=
+		"display: none;">Cannot stream video. The cause may be a defective
+	      camera or that it is currently being used by another
+	      application.</li>
+	    <li class="notice-fail fail_videoPaused" style="display: none;">The
+	      video track is paused.</li>
+	    <li class="notice-fail fail_noStream" style="display: none;">Cannot
+	      detect any active stream of media content.</li>
+	    <li class="notice-fail fail_noTrack" style="display: none;">Your
+	      webcam does not output any video tracks.</li>
+	    <li class="notice-fail fail_cannotGetTracks" style=
+		"display: none;">Your browser does not support features for
+	      accessing video tracks.</li>
+	    <li class="notice-fail fail_trackMuted" style="display: none;">
+	      Video track not available due to technical issue.</li>
+	    <li class="notice-fail fail_trackEnded" style="display: none;">Your
+	      webcam suddenly stopped transmitting video track.</li>
+	    <li class="notice-fail fail_trackDisabled" style="display: none;">
+	      For unknown reasons, the video track is disabled.</li>
+	    <li class="notice-text text_enableDevid" style="display: none;">
+	      Click here to allow access to webcam identifiers</li>
+	    <li class="notice-text text_forceQuery" style="display: none;">
+	      Click here to try forcibly start the camera</li>
+	    <li class="notice-loading loading_checkingWebcamera" style=
+		"display: none;">Checking your webcam. Please wait...</li>
+	    <li class="notice-done done_webcamDetectedOne" style=
+		"display: none;">A web camera was detected. Press “Check my webcam”
+	      to find out if your camera is working properly.</li>
+	    <li class="notice-done done_webcamDetectedMulti" style=
+		"display: none;">Several web cameras were detected. To check if
+	      your camera is working properly, select it from the drop-down list
+	      below and press “Check my webcam”.</li>
+	    <li class="notice-done done_isWorking" style="display: none;">Good
+	      news! The webcam checker tool determined that your camera is
+	      working properly. Nevertheless, consider to run the <a href=
+								     "https://webcamtests.com/">online webcam test</a> for additional
+	      technical information.</li>
+	    <li class="notice-info info_webcamSpecs" style="display: none;">The
+	      name of your camera is detected as “{{name}}” and as the default
+	      resolution it uses {{resolution}}. The duration of video playback:
+	      {{duration}}s.</li>
+	    <li class="notice-fail fail_notWorking" style="display: none;">Bad
+	      news! It seems your camera is not working properly. However, this
+	      may be wrong, especially if you see yourself in the image below.
+	      For more accurate results run the <a href=
+						   "https://webcamtests.com/">online webcam test</a>.</li>
+	  </ul>
+	  <div id="webcam-controls"><select id="webcam-selecter"></select>
+	    <button id="webcam-launcher">Check my webcam</button></div>
+	  <div id="webcam-actions"><button data-action=
+					   "fullscreen">Fullscreen</button><button data-action=
+										   "stopWebcam">Stop webcam</button></div>
+	  <video id="webcam-stream">Webcam viewer</video><br>
+	</div>
+      </div>
+      <div class="box box-left">
+	
+	<div>
+	  <h3>About the checker</h3>
+	  <p>The <a href="https://webcamtests.com/">online webcam test</a> is
+	    a good tool for testing the camera and finding out technical
+	    information about it. Of course, it allows you to find out whether
+	    camera works correctly, but it makes a lot of tests, and because of
+	    this it is a bit slow.</p>
+	  <br>
+	  <p>For those who just need to know if the camera is functional, I
+	    have developed a simple webcam checker. It is fast, simple, and
+	    free. This checker allows you to check webcam online to see if is
+	    working properly. This test provides only a few details about your
+	    camera (more exactly, the camera name and default resolution).</p>
+	  <br>
+	  <h3>How to check my webcam?</h3>
+	  <ol>
+	    <li>Select the desired webcam.</li>
+	    <li>Press the “Check my webcam” button.</li>
+	    <li>Grant access to your camera.</li>
+	    <li>Wait a few seconds to get the result.</li>
+	  </ol>
+	</div>
+      </div>
+      
+</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<footer>
+  <div>© 2017-2021, <a href=
+		       "https://webcamtests.com/">WebcamTests.Com</a>. Test your webcam
+    online.</div>
+</footer>
+<script>
+  var appvars = {"config":{"lang":{"iso":"en"},"domainRoot":".webcamtests.com","staticUrl":"\/\/static.webcamtests.com\/","dev":false,"page":{"id":2247},"assetsVersions":{"js":"0.1.78","css":"0.0.60"},"csrf":{"name":"TOKEN1155158991X1619922883","value":"Q05ZRfZXmpsG87jyOx3fkp04QU.R1svz"}}};
+</script> 
+<script src="cam_files/jquery.js">
+</script> 
+<script async src="cam_files/main.js">
+</script>
+<script async src="cam_files/js.js">
+</script>
+<script type="text/javascript" src="cam_files/main_004.js">
+</script>
+<link type="text/css" rel="stylesheet" href=
+      "cam_files/main_002.css">
+<script type="text/javascript" src="cam_files/main_002.js">
+</script>
+<script type="text/javascript" src="cam_files/main_003.js">
+</script>
+<script type="text/javascript" src="cam_files/adapter.js">
+</script>
+</body>
+</html>

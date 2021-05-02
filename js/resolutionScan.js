@@ -84,7 +84,7 @@ $(document).ready(() => {
 });
 
 //Start scan by controlling the quick and full scan buttons
-$('button').click(function(){
+$('.cambutton').click(function(){
 
     //setup for a quick scan using the hand-built quickScan object
     if (this.innerHTML === "Quick Scan") {
@@ -103,7 +103,7 @@ $('button').click(function(){
     }
 
     scanning = true;
-    $('button').prop("disabled", true);
+    $('.cambutton').prop("disabled", true);
     $('table').show();
     $('#jump').show();
 
@@ -274,7 +274,7 @@ function captureResults(status) {
     }
     else { //finish up
         video.removeEventListener("onloadedmetadata", displayVideoDimensions); //turn off the event handler
-        $('button').off("click"); //turn the generic button handler  off
+        $('.cambutton').off("click"); //turn the generic button handler  off
 
         scanning = false;
 
