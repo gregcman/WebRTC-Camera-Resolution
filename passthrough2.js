@@ -7,6 +7,7 @@ import {Gltf2Node} from './js/render/nodes/gltf2.js';
 import {VideoNode} from './js/render/nodes/video.js';
 import {InlineViewerHelper} from './js/util/inline-viewer-helper.js';
 import {QueryArgs} from './js/util/query-args.js';
+import {vec3, mat4, quat, mat3} from './js/render/math/gl-matrix.js';
 
 // If requested, use the polyfill to provide support for mobile devices
 // and devices which only support WebVR.
@@ -14,6 +15,23 @@ import WebXRPolyfill from './js/third-party/webxr-polyfill/build/webxr-polyfill.
 if (QueryArgs.getBool('usePolyfill', true)) {
     let polyfill = new WebXRPolyfill();
 }
+
+var logger = document.getElementById('log');
+
+function logged () {
+    for (var i = 0; i < arguments.length; i++) {
+        if (typeof arguments[i] == 'object') {
+            logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + '<br />';
+        } else {
+            logger.innerHTML += arguments[i] + '<br />';
+        }
+    }
+}
+
+logged = function(){}
+
+logged(1)
+
 
 let autoplayCheckbox = document.getElementById('autoplayVideo');
 
@@ -26,7 +44,15 @@ let inlineViewerHelper = null;
 let gl = null;
 let renderer = null;
 let scene = new Scene();
-scene.addNode(new Gltf2Node({url: 'media/gltf/home-theater/home-theater.gltf'}));
+let roomNode = new Gltf2Node({url: 'media/gltf/home-theater/home-theater.gltf'});
+roomNode.scale = [200.0, 200.0, 200.0];
+
+let rotTestNode = new Gltf2Node({url: 'media/gltf/space/space.gltf'})
+rotTestNode.scale = [10.0, 10.0, 10.0];
+
+scene.addNode(roomNode);
+scene.addNode(rotTestNode);
+
 scene.enableStats(false);
 
 let video = document.querySelector('#video');
@@ -35,7 +61,7 @@ video.loop = true;
 
 let videoNode = new VideoNode({
     video: video,
-    displayMode: 'stereoTopBottom'
+    //displayMode: 'stereoTopBottom'
 });
 
 // When the video is clicked we'll pause it if it's playing.
@@ -89,7 +115,7 @@ function initXR() {
         onRequestSession: onRequestSession,
         onEndSession: onEndSession
     });
-    document.querySelector('header').appendChild(xrButton.domElement);
+    document.getElementById('butt').appendChild(xrButton.domElement);
 
     
     if (navigator.xr) {
@@ -197,7 +223,16 @@ function onSessionEnded(event) {
     }
 }
 
+let quatNone = quat.fromEuler(quat.create(),0,0,0);
+let quatX = quat.fromEuler(quat.create(),90,0,0);
+let quatY = quat.fromEuler(quat.create(),0,90,0);
+let quatZ = quat.fromEuler(quat.create(),0,0,90);
+let quatTemp = quat.create();
+
+let up = vec3.fromValues(1.0,0.0,0.0);
+var ticks = 0;
 function onXRFrame(t, frame) {
+    ticks = ticks + 1;
     let session = frame.session;
     let refSpace = session.isImmersive ?
         xrImmersiveRefSpace :
@@ -209,6 +244,45 @@ function onXRFrame(t, frame) {
     session.requestAnimationFrame(onXRFrame);
 
     scene.updateInputSources(frame, refSpace);
+
+    let poseTransform = mat3.fromMat4(mat3.create(),pose.transform.matrix);
+
+    let node =
+	videoNode;
+	//rotTestNode;
+    
+    //Move the Screen in from of your face
+    let original = vec3.fromValues(0, 0, -1);  
+    node.translation = vec3.transformMat3(vec3.create(), original, poseTransform);
+
+    //let poseRot = pose.transform.orientation;
+    //let out_axis = vec3.create();
+    //let theta = quat.getAxisAngle(out_axis, poseRot);
+    
+    //let right = vec3.cross(vec3.create(),out_axis,up);
+    //roomNode.rotation = quat.fromEuler(quat.create(),Math.random() * 360,Math.random() * 360 ,Math.random() * 360);
+    if (ticks % 60 == 4) {
+	//logged(1);
+	
+	logged(poseTransform);
+    }
+    
+    
+    
+    //var d = new Date();
+    node.rotation = quat.fromMat3(quat.create(),poseTransform)
+	//quat.mul(quat.create(),poseRot,quat.fromEuler(quat.create(),Math.random() * 360,Math.random() * 360 ,Math.random() * 360))
+	//quatNone;
+	//quat.mul(quat.create(),quatZ,poseRotInv);
+	//quat.fromEuler(quat.create(),Math.random() * 360,Math.random() * 360 ,Math.random() * 360)
+	//quat.fromEuler(quat.create(),0,0,0);
+	//quat.fromEuler(quat.create(),d.getTime()/10,0,0);
+	//quat.fromValues(Math.random(1.0),Math.random(1.0),Math.random(1.0),Math.random(1.0));
+	//quat.random(rotout);
+	//quat.invert(quat.create(),poseRot);
+	//quat.multiply(rotout,poseRot,quat.fromEuler(quat.create(),Math.random(100.0),Math.random(100.0),Math.random(100.0)))
+	//poseRot;
+	//quat.cross(quat.create(), poseRot,quatY);
 
     scene.drawXRFrame(frame, pose);
 
