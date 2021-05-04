@@ -28,7 +28,7 @@ function logged () {
     }
 }
 
-logged = function(){}
+//logged = function(){}
 
 logged(1)
 
@@ -210,6 +210,18 @@ function onSessionStarted(session) {
 
         session.requestAnimationFrame(onXRFrame);
     });
+
+    //detect input source change
+    xrSession.addEventListener('inputsourceschange', onInputSourcesChange);
+
+    logged(xrInputSources);
+}
+
+//detect input source change
+let xrInputSources = null;
+function onInputSourcesChange(event) {
+    xrInputSources = event.session.inputSources;
+    logged(xrInputSources);
 }
 
 function onEndSession(session) {
@@ -250,9 +262,10 @@ function onXRFrame(t, frame) {
     let node =
 	videoNode;
 	//rotTestNode;
-    
+
+    let distanceToFace = - document.querySelector("#textareaID").value;
     //Move the Screen in from of your face
-    let original = vec3.fromValues(0, 0, -1);  
+    let original = vec3.fromValues(0, 0, distanceToFace);  
     node.translation = vec3.transformMat3(vec3.create(), original, poseTransform);
 
     //let poseRot = pose.transform.orientation;
@@ -261,11 +274,11 @@ function onXRFrame(t, frame) {
     
     //let right = vec3.cross(vec3.create(),out_axis,up);
     //roomNode.rotation = quat.fromEuler(quat.create(),Math.random() * 360,Math.random() * 360 ,Math.random() * 360);
-    if (ticks % 60 == 4) {
+    //if (ticks % 60 == 4) {
 	//logged(1);
 	
-	logged(poseTransform);
-    }
+	//logged(poseTransform);
+    //}
     
     
     
